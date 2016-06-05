@@ -13,6 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        // Spark Related Events
         // User Related Events...
         'Laravel\Spark\Events\Auth\UserRegistered' => [
             'Laravel\Spark\Listeners\Subscription\CreateTrialEndingNotification',
@@ -63,6 +64,43 @@ class EventServiceProvider extends ServiceProvider
 
         'Laravel\Spark\Events\Teams\UserInvitedToTeam' => [
             'Laravel\Spark\Listeners\Teams\CreateInvitationNotification',
+        ],
+        //End Of Spark Related Events
+
+        // Start of Promo Related Events
+        'Laravel\app\Events\Promotions\PromotionCreated' => [
+            'Laravel\app\Listeners\Promotions\CreatePromotionsVerifiedPayoutNotification',
+            'Laravel\app\Listeners\Promotions\CreatePromotionEndingNotification',
+        ],
+
+        'Laravel\app\Events\Promotions\PromotionCancelled' => [
+            'Laravel\app\Listeners\Promotions\RemovePromotionProposals',
+            'Laravel\app\Listeners\Promotions\CreateTeamNotification',
+        ],
+
+        'Laravel\app\Events\Promotions\PromotionCompleted' => [
+            'Laravel\app\Listeners\Promotions\CreatePromotionCompletedNotification'
+        ],
+
+        'Laravel\app\Events\Promotions\PromotionProposalled' => [
+            'Laravel\app\Listeners\Promotions\Proposals\CreateProposalsNotification',
+        ],
+
+        'Laravel\app\Events\Promotions\PromotionsProposalAccepted' => [
+            'Laravel\app\Listeners\Promotions\Proposals\CreateProposalAcceptedNotification',
+        ],
+
+        'Laravel\app\Events\Promotions\PromotionsPropsalDeclined' => [
+            'Laravel\app\Listeners\Promotions\Proposals\CreateProposalDeclinedNotification',
+            'Laravel\app\Listeners\Promotions\Proposals\UpdatePromotionProposal',
+        ]
+
+        'Laravel\app\Events\Promotions\PromotionsPropsalPayment' => [
+            'Laravel\app\Listeners\Promotions\Proposals\CreateProposalPaidNotification',
+        ],
+
+        'Laravel\app\Events\Promotions\ProposalMessageCreated' => [
+            'Laravel\app\Listeners\Promotions\Proposals\CreateProposalNewMessageNotification',
         ],
     ];
 
