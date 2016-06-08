@@ -5,6 +5,7 @@ namespace App;
 use App\Team;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Promotion extends Model
 {
@@ -17,8 +18,26 @@ class Promotion extends Model
         'title',
         'description',
         'total',
+        'team_id',
         'active'
     ];
+
+    /**
+     * Set Rules
+     *
+     * @var array
+     */
+    private $rules = array(
+        'title' => 'required|max:255',
+        'description'  => 'required',
+        'total' => 'required',
+        'team_id' => 'required',
+    );
+
+    /*
+    * Errors From Validation
+    */
+    private $errors;
 
     /**
      * The attributes that should be cast to native types.
@@ -28,6 +47,31 @@ class Promotion extends Model
     protected $casts = [
         'active' => 'boolean',
     ];
+
+    /*
+    * Make a new Validate object
+    */
+    public function validate($input)
+    {
+        $validator = Validator::make($input, $this->rules);
+
+        if ($validator->fails())
+        {
+            $this->errors = $validator->errors();
+
+            return false;
+        }
+
+        return $validator->passes();
+    }
+
+    /*
+    * Return validation errors
+    */
+    public function errors()
+    {
+        return $this->errors;
+    }
 
     /*
      * Get the proposals for the promotion

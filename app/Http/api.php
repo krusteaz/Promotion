@@ -16,7 +16,7 @@ Route::group([
     //'middleware' => 'auth:api'
 ], function () {
 	Route::resource('promotions', 'Api\PromotionFeedController');
-	Route::resource('promotion', 'Api\PromtionController');
+	Route::resource('promotion', 'Api\PromotionController');
 	Route::resource('tracking', 'Api\PromotionTrackingController');
 	Route::resource('proposal', 'Api\ProposalController');
 	Route::resource('thread', 'Api\ThreadController');

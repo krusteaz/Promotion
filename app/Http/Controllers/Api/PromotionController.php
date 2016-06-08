@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Promotion;
 
 class PromotionController extends Controller
 {
@@ -37,7 +38,14 @@ class PromotionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $promotion = new Promotion($request->all());
+
+        if( ! $promotion->validate($request->all())) 
+        {
+            return $promotion->errors();
+        }
+
+        return $promotion->create($request->all())->toJson();
     }
 
     /**
