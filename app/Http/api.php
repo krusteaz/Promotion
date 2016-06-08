@@ -13,7 +13,13 @@
 
 Route::group([
     'prefix' => 'api',
-    'middleware' => 'auth:api'
+    //'middleware' => 'auth:api'
 ], function () {
-    //
+	Route::resource('promotions', 'Api\PromotionFeedController');
+	Route::resource('promotion', 'Api\PromtionController');
+	Route::resource('tracking', 'Api\PromotionTrackingController');
+	Route::resource('proposal', 'Api\ProposalController');
+	Route::resource('thread', 'Api\ThreadController');
+	Route::resource('payment', 'Api\PaymentController');
+	Route::resource('payout', 'Api\PayoutController');
 });
