@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Promotion;
+
 class PromotionFeedController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class PromotionFeedController extends Controller
      */
     public function index()
     {
-        //
+        return "List of All post";
     }
 
     /**
