@@ -18,11 +18,7 @@ class PromotionFeedController extends Controller
      */
     public function index()
     {
-        $promotions = new Promotion();
-        
-        $promotions->active();
-
-        return $promotions->paginate();
+        return Promotion::active()->paginate();
     }
 
     /**
