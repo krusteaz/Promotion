@@ -15,6 +15,9 @@ Route::group([
     'prefix' => 'api',
     //'middleware' => 'auth:api'
 ], function () {
+	Route::post('user/authenticate','Api\UserController@authenticate');
+	Route::resource('user', 'Api\UserController');
+
 	Route::resource('promotions', 'Api\PromotionFeedController');
 	Route::resource('promotion', 'Api\PromotionController');
 	Route::resource('tracking', 'Api\PromotionTrackingController');

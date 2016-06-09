@@ -18,7 +18,11 @@ class PromotionFeedController extends Controller
      */
     public function index()
     {
-        return "List of All post";
+        $promotions = new Promotion();
+        
+        $promotions->active();
+
+        return $promotions->paginate();
     }
 
     /**
@@ -61,7 +65,7 @@ class PromotionFeedController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -73,7 +77,7 @@ class PromotionFeedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

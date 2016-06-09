@@ -38,14 +38,14 @@ class PromotionController extends Controller
      */
     public function store(Request $request)
     {
-        $promotion = new Promotion($request->all());
+        $promotion = new Promotion();
 
-        if( ! $promotion->validate($request->all())) 
+        if( ! $promotion->validate($request)) 
         {
             return $promotion->errors();
         }
 
-        return $promotion->create($request->all())->toJson();
+        return $promotion->create($request)->toJson();
     }
 
     /**
@@ -56,7 +56,9 @@ class PromotionController extends Controller
      */
     public function show($id)
     {
-        //
+        $promotion = Promotion::findorFail($id);
+
+        return $promotion->toJson();
     }
 
     /**
@@ -79,7 +81,15 @@ class PromotionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $promotion = Promotion::find($id);
+
+        if( ! $promotion->validate($request->all())) {
+            return response($validate->errors(), 405);
+        }
+
+        $promotion->update($request->all());
+
+        return $promotion->toJson();
     }
 
     /**
@@ -90,6 +100,9 @@ class PromotionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $promotion = Promotion::findorFail($id);
+        $promotion->delete();
+
+        return response(array('Success' => 'Promotion was deleted.'));
     }
 }
