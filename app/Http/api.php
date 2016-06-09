@@ -20,8 +20,8 @@ Route::group([
 
 	Route::resource('promotions', 'Api\PromotionFeedController');
 	Route::resource('promotion', 'Api\PromotionController');
-	Route::resource('tracking', 'Api\PromotionTrackingController');
-	Route::resource('proposal', 'Api\ProposalController');
+	Route::resource('promotion.proposal', 'Api\ProposalController');
+
 	Route::resource('thread', 'Api\ThreadController');
 	Route::resource('payment', 'Api\PaymentController');
 	Route::resource('payout', 'Api\PayoutController');

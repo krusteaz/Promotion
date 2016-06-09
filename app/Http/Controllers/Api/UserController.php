@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use Hash;
 
-use Promotion;
-
-class PromotionFeedController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +18,24 @@ class PromotionFeedController extends Controller
      */
     public function index()
     {
-        // Get Active Promotions
-        $promotions = Promotion::active();
+        //
+    }
 
-        // Paginate Promotions
-        $promotions = $promotions->paginate();
+    /**
+     * Checking User Credentials.
+     *
+     * @return App\User
+     */
+    public function authenticate(Request $request)
+    {
+        $user = User::where('email',$request->email)->first();
 
-        // Response in Json
-        return $promotions->toJson();
+        if( ! Hash::check($request->password, $user->password)) 
+        {
+            abort(403, 'Incorrect Email/Password Combination.');
+        }
+
+        return $user->currentTeam()->toJson();
     }
 
     /**
@@ -35,7 +45,7 @@ class PromotionFeedController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -46,7 +56,7 @@ class PromotionFeedController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
@@ -68,7 +78,7 @@ class PromotionFeedController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -80,7 +90,7 @@ class PromotionFeedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        //
     }
 
     /**
