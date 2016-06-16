@@ -23,7 +23,7 @@ Route::group([
 	Route::resource('promotion.proposal', 'Api\ProposalController');
 
 	// This is what I am thinking for the resource value
-	Route::resource('proposal.inovoice', 'Api\MarketplaceInvoiceController');
+	Route::resource('proposal.invoice', 'Api\MarketplaceInvoiceController');
 
 	Route::resource('thread', 'Api\ThreadController');
 	Route::resource('payment', 'Api\PaymentController');

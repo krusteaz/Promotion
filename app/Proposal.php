@@ -74,6 +74,10 @@ class Proposal extends Model
     	return $this->hasOne('App\MarketplaceInvoice');
     }
 
+    public function promotion() {
+        return $this->hasOne('App\Promotion', 'id','promotion_id');
+    }
+
     /*
      * Get the promotion for the proposal
      */
